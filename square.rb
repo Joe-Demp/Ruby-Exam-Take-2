@@ -8,7 +8,7 @@ class Square
 
   def ==(other)
     if other.is_a?(Square)
-      other.col == @column && other.row == @row
+      other.column == @column && other.row == @row
     else
       false
     end
