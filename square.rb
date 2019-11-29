@@ -2,7 +2,7 @@ class Square
   attr_reader :column, :row
 
   def initialize(col, row)
-    @column = col.is_a?(Integer) ? SYMBOL_TO_I[col] : col
+    @column = col.is_a?(Integer) ? I_TO_SYMBOL[col] : col.to_sym
     @row = row
   end
 
