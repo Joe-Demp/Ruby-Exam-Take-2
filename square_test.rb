@@ -1,13 +1,32 @@
 require 'test/unit'
 require_relative 'square.rb'
+require_relative 'rook.rb'
+require_relative 'chess_board.rb'
 
 class SquareTest < Test::Unit::TestCase
   def setup
     @square_a = Square.new(:e, 6)
     @square_b = Square.new(5, 6)
     @square_c = Square.new(:e, 6)
-
     @square_d = Square.new(:b, 2)
+
+    @adjacent_to_square_a = [
+        Square.new(:e, 7),
+        Square.new(:f, 6),
+        Square.new(:e, 5),
+        Square.new(:d, 6),
+        Square.new(:f, 7),
+        Square.new(:f, 5),
+        Square.new(:d, 5),
+        Square.new(:d, 7)
+    ]
+
+    @test_rook = Rook.new(nil, :white)
+    @empty_board = ChessBoard.new
+    @board_with_rook = ChessBoard.new
+
+    # note, piece added to the right of square_a
+    @board_with_rook.add_piece(Square.new(:f, 6), @test_rook)
   end
 
   def test_initialize
@@ -23,6 +42,16 @@ class SquareTest < Test::Unit::TestCase
     assert(@square_a == @square_b)
 
     assert_false(@square_c == @square_d)
+  end
+
+  def test_adjacent
+    Square::Directions.each_index do |i|
+      adj = @square_a.adjacent(@empty_board, Square::Directions[i])
+      assert_equal(@adjacent_to_square_a[i], adj)
+    end
+
+    adj = @square_a.adjacent(@board_with_rook, :right)
+    assert_nil(adj)
   end
 
   def test_column_i

@@ -45,8 +45,6 @@ class ChessBoard
         else
           piece = @pieces.find do |other|
             other_square = other.square
-            puts other.square.inspect
-            puts other_square.inspect
             other_square.row == row && other_square.column_i == col
           end
           str += piece.to_char + ' '
