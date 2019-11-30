@@ -16,7 +16,7 @@ class Square
     end
   end
 
-  def adjacent(board, direction)
+  def adjacent(direction)
     row = @row
     col = column_i
 
@@ -42,8 +42,11 @@ class Square
       col = 0
     end
 
-    next_square = Square.new(col, row)
-    next_square if board.legal_square?(next_square)
+    Square.new(col, row)
+  end
+
+  def to_s
+    column.to_s + row.to_s
   end
 
   def column_i

@@ -15,4 +15,13 @@ IO.foreach('pieces.txt') do |line|
   board.add_piece(square, rook)
 end
 
+# part 1
 puts board.to_s
+puts
+
+# part 2
+board.pieces.each do |piece|
+  moves = []
+  piece.each_legal_move { |move| moves << move }
+  puts "#{piece} #{moves.length}"
+end

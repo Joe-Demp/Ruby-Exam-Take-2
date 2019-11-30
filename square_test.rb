@@ -23,10 +23,6 @@ class SquareTest < Test::Unit::TestCase
 
     @test_rook = Rook.new(nil, :white)
     @empty_board = ChessBoard.new
-    @board_with_rook = ChessBoard.new
-
-    # note, piece added to the right of square_a
-    @board_with_rook.add_piece(Square.new(:f, 6), @test_rook)
   end
 
   def test_initialize
@@ -46,12 +42,9 @@ class SquareTest < Test::Unit::TestCase
 
   def test_adjacent
     Square::Directions.each_index do |i|
-      adj = @square_a.adjacent(@empty_board, Square::Directions[i])
+      adj = @square_a.adjacent(Square::Directions[i])
       assert_equal(@adjacent_to_square_a[i], adj)
     end
-
-    adj = @square_a.adjacent(@board_with_rook, :right)
-    assert_nil(adj)
   end
 
   def test_column_i

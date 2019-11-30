@@ -1,4 +1,5 @@
 class ChessBoard
+  attr_reader :pieces
 
   def initialize
     @pieces = []
@@ -18,17 +19,22 @@ class ChessBoard
     @free_squares[9].fill(false, 0..9)
   end
 
-  def legal_square?(square)
+  def square_on_board?(square)
     row, col = square.row, square.column_i
+    (1..8).include?(row) && (1..8).include?(col)
+  end
 
-    @free_squares[row][col]
+  def get_piece(square)
+    piece = @pieces.find { |piece| piece.square == square }
+    piece
   end
 
   def add_piece(square, piece)
-    return unless legal_square?(square)
+    return unless square_on_board?(square) && get_piece(square).nil?
 
     @pieces << piece
     piece.square = square
+    piece.board = self
     @free_squares[square.row][square.column_i] = false
   end
 
@@ -40,13 +46,10 @@ class ChessBoard
     while row > 0
       str += row.to_s + ' '
       while col <= 8
-        if @free_squares[row][col]
+        piece = get_piece(Square.new(col, row))
+        if piece.nil?
           str += '* '
         else
-          piece = @pieces.find do |other|
-            other_square = other.square
-            other_square.row == row && other_square.column_i == col
-          end
           str += piece.to_char + ' '
         end
         col += 1
