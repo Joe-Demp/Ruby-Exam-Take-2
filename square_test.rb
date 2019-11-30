@@ -2,6 +2,7 @@ require 'test/unit'
 require_relative 'square.rb'
 require_relative 'rook.rb'
 require_relative 'chess_board.rb'
+require_relative 'piece.rb'
 
 class SquareTest < Test::Unit::TestCase
   def setup
@@ -41,8 +42,8 @@ class SquareTest < Test::Unit::TestCase
   end
 
   def test_adjacent
-    Square::Directions.each_index do |i|
-      adj = @square_a.adjacent(Square::Directions[i])
+    Piece::Directions.each_index do |i|
+      adj = @square_a.adjacent(Piece::Directions[i])
       assert_equal(@adjacent_to_square_a[i], adj)
     end
   end

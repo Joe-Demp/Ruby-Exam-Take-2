@@ -3,3 +3,7 @@ Rd3
 rd7
 rf5
 Rb5
+bf3
+Bc6
+qb1
+Qg4

@@ -58,9 +58,4 @@ class Square
     e: 5, f: 6, g: 7, h: 8
   }.freeze
   I_TO_SYMBOL = [nil, :a, :b, :c, :d, :e, :f, :g, :h].freeze
-
-  Directions = [
-      :up, :right, :down, :left,
-      :neast, :seast, :swest, :nwest
-  ].freeze
 end

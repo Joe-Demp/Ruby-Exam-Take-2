@@ -3,20 +3,6 @@ class ChessBoard
 
   def initialize
     @pieces = []
-
-    @free_squares = []
-    (0...10).each do |row|
-      @free_squares[row] = []
-    end
-
-    # fill with the valid squares
-    @free_squares[0].fill(false, 0..9)
-    (1..8).each do |row|
-      @free_squares[row][0] = false
-      @free_squares[row].fill(true, 1..8)
-      @free_squares[row][9] = false
-    end
-    @free_squares[9].fill(false, 0..9)
   end
 
   def square_on_board?(square)
@@ -25,8 +11,7 @@ class ChessBoard
   end
 
   def get_piece(square)
-    piece = @pieces.find { |piece| piece.square == square }
-    piece
+    @pieces.find { |item| item.square == square }
   end
 
   def add_piece(square, piece)
@@ -35,7 +20,6 @@ class ChessBoard
     @pieces << piece
     piece.square = square
     piece.board = self
-    @free_squares[square.row][square.column_i] = false
   end
 
   def to_s
@@ -43,7 +27,7 @@ class ChessBoard
     row = 8
     col = 1
 
-    while row > 0
+    while row.positive?
       str += row.to_s + ' '
       while col <= 8
         piece = get_piece(Square.new(col, row))
